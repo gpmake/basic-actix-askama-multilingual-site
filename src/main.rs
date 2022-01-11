@@ -1,4 +1,3 @@
-//use actix_files as fs;
 use actix_web::{http, middleware, web, App, HttpRequest, HttpResponse, HttpServer, Result};
 use askama::Template;
 
