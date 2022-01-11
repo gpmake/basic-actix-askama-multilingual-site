@@ -102,7 +102,6 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(move || {
         App::new()
             .wrap(middleware::Logger::default())
-            //.service(fs::Files::new("/static", "static"))
             .service(web::resource("/").route(web::get().to(index)))
             .service(web::resource("/{lang}").route(web::get().to(home)))
             .service(web::resource("/{lang}/about").route(web::get().to(about)))
