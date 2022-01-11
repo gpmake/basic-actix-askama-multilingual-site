@@ -42,7 +42,6 @@ async fn index() -> Result<HttpResponse> {
 
 async fn home(req: HttpRequest) -> Result<HttpResponse> {
     let lang: String = req.match_info().get("lang").unwrap().parse().unwrap();
-    //let title = "Home-En";
     let s = match lang.as_str() {
         "en" => HomeEn {
             lang: &lang,
