@@ -1,7 +1,6 @@
 use actix_web::{http, middleware, web, App, HttpRequest, HttpResponse, HttpServer, Result};
 use askama::Template;
 
-
 #[derive(Template)]
 #[template(path = "home/home.html", localizer = "lang")]
 #[l10n(r#""en""#, "home/home-en.html")]
@@ -30,57 +29,37 @@ async fn index() -> Result<HttpResponse> {
 
 async fn home(req: HttpRequest) -> Result<HttpResponse> {
     let lang: String = req.match_info().get("lang").unwrap().parse().unwrap();
-    let s = match lang.as_str() {
-        "en" => Home {
+    if lang == "en" || lang == "it" {
+        let s = Home {
             lang: &lang,
             title: &format!("Home-{}", &lang),
             page: &"home".to_string(),
         }
         .render()
-        .unwrap(),
-        "it" => Home {
-            lang: &lang,
-            title: &format!("Home-{}", &lang),
-            page: &"home".to_string(),
-        }
-        .render()
-        .unwrap(),
-        _ => "".to_string(),
-    };
-    if s == "" {
+        .unwrap();
+        Ok(HttpResponse::Ok().content_type("text/html").body(s))
+    } else {
         Ok(HttpResponse::TemporaryRedirect()
             .insert_header((http::header::LOCATION, "/en"))
             .finish())
-    } else {
-        Ok(HttpResponse::Ok().content_type("text/html").body(s))
     }
 }
 
 async fn about(req: HttpRequest) -> Result<HttpResponse> {
     let lang: String = req.match_info().get("lang").unwrap().parse().unwrap();
-    let s = match lang.as_str() {
-        "en" => About {
+    if lang == "en" || lang == "it" {
+        let s = About {
             lang: &lang,
-            title: &format!("About-{}", &lang),
+            title: &format!("Home-{}", &lang),
             page: &"about".to_string(),
         }
         .render()
-        .unwrap(),
-        "it" => About {
-            lang: &lang,
-            title: &format!("About-{}", &lang),
-            page: &"about".to_string(),
-        }
-        .render()
-        .unwrap(),
-        _ => "".to_string(),
-    };
-    if s == "" {
+        .unwrap();
+        Ok(HttpResponse::Ok().content_type("text/html").body(s))
+    } else {
         Ok(HttpResponse::TemporaryRedirect()
             .insert_header((http::header::LOCATION, "/en"))
             .finish())
-    } else {
-        Ok(HttpResponse::Ok().content_type("text/html").body(s))
     }
 }
 
