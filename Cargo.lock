@@ -210,8 +210,7 @@ dependencies = [
 [[package]]
 name = "askama"
 version = "0.11.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4d8f355701c672c2ba3d718acbd213f740beea577cc4eae66accdffe15be1882"
+source = "git+https://github.com/Kijewski/askama.git?branch=pr-multi-paths#29b3738dc285d1bb9f8488ffc0573a452bd10d79"
 dependencies = [
  "askama_derive",
  "askama_escape",
@@ -221,8 +220,7 @@ dependencies = [
 [[package]]
 name = "askama_derive"
 version = "0.11.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "84704cab5b7ae0fd3a9f78ee5eb7b27f3749df445f04623db6633459ae283267"
+source = "git+https://github.com/Kijewski/askama.git?branch=pr-multi-paths#29b3738dc285d1bb9f8488ffc0573a452bd10d79"
 dependencies = [
  "askama_shared",
  "proc-macro2",
@@ -232,17 +230,17 @@ dependencies = [
 [[package]]
 name = "askama_escape"
 version = "0.10.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9a1bb320f97e6edf9f756bf015900038e43c7700e059688e5724a928c8f3b8d5"
+source = "git+https://github.com/Kijewski/askama.git?branch=pr-multi-paths#29b3738dc285d1bb9f8488ffc0573a452bd10d79"
 
 [[package]]
 name = "askama_shared"
-version = "0.12.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dae03eebba55a2697a376e58b573a29fe36893157173ac8df312ad85f3c0e012"
+version = "0.12.1"
+source = "git+https://github.com/Kijewski/askama.git?branch=pr-multi-paths#29b3738dc285d1bb9f8488ffc0573a452bd10d79"
 dependencies = [
  "askama_escape",
  "humansize",
+ "mime",
+ "mime_guess",
  "nom",
  "num-traits",
  "percent-encoding",
@@ -686,6 +684,16 @@ name = "mime"
 version = "0.3.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2a60c7ce501c71e03a9c9c0d35b861413ae925bd979cc7a4e30d060069aaac8d"
+
+[[package]]
+name = "mime_guess"
+version = "2.0.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2684d4c2e97d99848d30b324b00c8fcc7e5c897b7cbb5819b09e7c90e8baf212"
+dependencies = [
+ "mime",
+ "unicase",
+]
 
 [[package]]
 name = "minimal-lexical"
@@ -1142,6 +1150,15 @@ name = "typenum"
 version = "1.15.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "dcf81ac59edc17cc8697ff311e8f5ef2d99fcbd9817b34cec66f90b6c3dfd987"
+
+[[package]]
+name = "unicase"
+version = "2.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "50f37be617794602aabbeee0be4f259dc1778fabe05e2d67ee8f79326d5cb4f6"
+dependencies = [
+ "version_check",
+]
 
 [[package]]
 name = "unicode-bidi"

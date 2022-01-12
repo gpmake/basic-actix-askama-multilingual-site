@@ -7,5 +7,6 @@ edition = "2021"
 
 [dependencies]
 actix-web = "4.0.0-beta.19"
-askama = "0.11.0"
+#askama = "0.11.0"
+askama =  { git = "https://github.com/Kijewski/askama.git", branch = "pr-multi-paths" }
 tokio = "1"

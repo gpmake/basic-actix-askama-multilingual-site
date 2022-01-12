@@ -1,33 +1,22 @@
 use actix_web::{http, middleware, web, App, HttpRequest, HttpResponse, HttpServer, Result};
 use askama::Template;
 
+
 #[derive(Template)]
-#[template(path = "home/home-en.html")]
-struct HomeEn<'a> {
+#[template(path = "home/home.html", localizer = "lang")]
+#[l10n(r#""en""#, "home/home-en.html")]
+#[l10n(r#""it""#, "home/home-it.html")]
+struct Home<'a> {
     lang: &'a str,
     title: &'a str,
     page: &'a str,
 }
 
 #[derive(Template)]
-#[template(path = "home/home-it.html")]
-struct HomeIt<'a> {
-    lang: &'a str,
-    title: &'a str,
-    page: &'a str,
-}
-
-#[derive(Template)]
-#[template(path = "about/about-en.html")]
-struct AboutEn<'a> {
-    lang: &'a str,
-    title: &'a str,
-    page: &'a str,
-}
-
-#[derive(Template)]
-#[template(path = "about/about-it.html")]
-struct AboutIt<'a> {
+#[template(path = "about/about.html", localizer = "lang")]
+#[l10n(r#""en""#, "about/about-en.html")]
+#[l10n(r#""it""#, "about/about-it.html")]
+struct About<'a> {
     lang: &'a str,
     title: &'a str,
     page: &'a str,
@@ -42,14 +31,14 @@ async fn index() -> Result<HttpResponse> {
 async fn home(req: HttpRequest) -> Result<HttpResponse> {
     let lang: String = req.match_info().get("lang").unwrap().parse().unwrap();
     let s = match lang.as_str() {
-        "en" => HomeEn {
+        "en" => Home {
             lang: &lang,
             title: &format!("Home-{}", &lang),
             page: &"home".to_string(),
         }
         .render()
         .unwrap(),
-        "it" => HomeIt {
+        "it" => Home {
             lang: &lang,
             title: &format!("Home-{}", &lang),
             page: &"home".to_string(),
@@ -70,14 +59,14 @@ async fn home(req: HttpRequest) -> Result<HttpResponse> {
 async fn about(req: HttpRequest) -> Result<HttpResponse> {
     let lang: String = req.match_info().get("lang").unwrap().parse().unwrap();
     let s = match lang.as_str() {
-        "en" => AboutEn {
+        "en" => About {
             lang: &lang,
             title: &format!("About-{}", &lang),
             page: &"about".to_string(),
         }
         .render()
         .unwrap(),
-        "it" => AboutIt {
+        "it" => About {
             lang: &lang,
             title: &format!("About-{}", &lang),
             page: &"about".to_string(),
